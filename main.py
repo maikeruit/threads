@@ -12,7 +12,6 @@ from requests.exceptions import ConnectionError
 class MyThread(Thread):
     """
     Класс для создания потоков через класс
-
     """
 
     def __init__(self, row, config, logger, lock):
