@@ -11,7 +11,7 @@ def data(path):
     return [
         dict(
             payload={
-                'users': '''<h1>{}</h1>Best | Sell | <b>{}</b> | Worldwide delivery
+                'users': '<h1>{}</h1>Best | Sell | <b>{}</b> | Worldwide delivery'.format(domain.title(), domain) + '''
 <!-- AddThis Smart Layers BEGIN -->
 <!-- Go to http://www.addthis.com/get/smart-layers to customize -->
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5346178e032a46d1"></script>
@@ -29,8 +29,7 @@ def data(path):
     'recommended' : {} 
   });
 </script>
-<!-- AddThis Smart Layers END -->
-                    '''.format(domain.title(), domain),
+<!-- AddThis Smart Layers END -->''',
                 'USERS_CODE': 'save'
             },
             params={
