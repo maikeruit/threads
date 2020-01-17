@@ -22,6 +22,7 @@ addthis.layers({
 </script>
 '''
 
+
 def data(path):
     o = urlparse(path)
     domain = re.sub(r'(\.[a-z]+)*', '', o.hostname)
@@ -30,7 +31,8 @@ def data(path):
     return [
         dict(
             payload={
-                'users': '<h1>{}</h1>Big Sale | Save up to 15% | Big Packs | <b>{}</b> | Free Shipping'.format(domain.title(), domain) + script,
+                'users': '<h1>{}</h1>Big Sale | Save up to 15% | Big Packs | <b>{}</b> | Free Shipping'.format(
+                    domain.title(), domain) + script,
                 'USERS_CODE': 'save'
             },
             params={
@@ -39,8 +41,8 @@ def data(path):
         ),
         dict(
             payload={
-                'main_name': '{} | Best | Sell | Worldwide delivery'.format(domain.title()) + script,
-                'NAME': 'save'
+                'main_name': '{} | Best | Sell | Worldwide delivery'.format(domain.title()),
+                'NAME': ' save'
             },
             params={
                 'controller': 'seo'
@@ -48,7 +50,7 @@ def data(path):
         ),
         dict(
             payload={
-                'main_name': '{} | Beste | Verkaufen | Weltweite Lieferung'.format(domain.title()) + script,
+                'main_name': '{} | Beste | Verkaufen | Weltweite Lieferung'.format(domain.title()),
                 'NAME': 'save'
             },
             params={
@@ -58,7 +60,7 @@ def data(path):
         ),
         dict(
             payload={
-                'main_name': '{} | Meilleur | Vendre | Livraison dans le monde'.format(domain.title()) + script,
+                'main_name': '{} | Meilleur | Vendre | Livraison dans le monde'.format(domain.title()),
                 'NAME': 'save'
             },
             params={
@@ -68,7 +70,7 @@ def data(path):
         ),
         dict(
             payload={
-                'main_name': '{} | El Mejor | Vender | Envíos a todo el mundo'.format(domain.title()) + script,
+                'main_name': '{} | El Mejor | Vender | Envíos a todo el mundo'.format(domain.title()),
                 'NAME': 'save'
             },
             params={
@@ -78,7 +80,7 @@ def data(path):
         ),
         dict(
             payload={
-                'main_name': '{} | Il migliore | Vendi | Consegna in tutto il mondo'.format(domain.title()) + script,
+                'main_name': '{} | Il migliore | Vendi | Consegna in tutto il mondo'.format(domain.title()),
                 'NAME': 'save'
             },
             params={

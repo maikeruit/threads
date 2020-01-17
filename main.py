@@ -5,6 +5,8 @@ import csv
 import configparser
 import payloads
 import utils
+import logger
+import re
 from bs4 import BeautifulSoup
 from threading import Thread, Lock
 from urllib.parse import urlparse, parse_qs
@@ -70,7 +72,7 @@ def install(row, config, logger, lock):
 
         data = payloads.data(url)
 
-        for datum in data:
+        for index, datum in enumerate(data):
             payload = datum.get('payload')
             params = datum.get('params')
             r = s.post(url, data=payload, params=params)
@@ -85,10 +87,10 @@ def install(row, config, logger, lock):
         Шаги обновления бд, на всякий случай прохожу все 3,
         если в этом нет необходимости можно сократить сразу до 3 шага
         """
-        for i in range(3):
+        for index in range(3):
             params = {
                 'controller': 'update',
-                'step': i + 1
+                'step': index + 1
             }
 
             r = s.get(url, params=params)
@@ -99,30 +101,37 @@ def install(row, config, logger, lock):
                     url=url
                 ), params)
 
-            if i + 1 == 3:
+            if index + 1 == 3:
                 soup = BeautifulSoup(r.content, 'html.parser')
-                div = soup.find('div', {'class': 'text'})
-                link = div.find('a')
-                query = parse_qs(urlparse(link.get('href')).query)
+                links = soup.find_all(href=True)
+                link = next(link.get('href') for link in links if re.search(r'\.sql', link.get('href')))
 
-                params.update({
-                    'part': query.get('part').pop()
-                })
+                if link:
+                    query = parse_qs(urlparse(link).query)
 
-                r = s.get(url, params=params)
+                    params.update({
+                        'part': query.get('part').pop()
+                    })
 
-                with lock:
-                    logger.info('{status} - {url} - %s'.format(
-                        status=r.status_code,
-                        url=url
-                    ), params)
+                    r = s.get(url, params=params)
+
+                    with lock:
+                        logger.info('{status} - {url} - %s'.format(
+                            status=r.status_code,
+                            url=url
+                        ), params)
+                else:
+                    with lock:
+                        logger.warning('No sql links - {url} - %s'.format(
+                            url=url
+                        ), params)
 
 
 if __name__ == '__main__':
     """
     Построчное чтение csv файла и запуск для каждой строки отдельного потока
     """
-    logger = utils.logger()
+    logger = logger.init_logger(__name__, testing_mode=False)
     lock = Lock()
     config = configparser.ConfigParser()
     config.read('config.ini')

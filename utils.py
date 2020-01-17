@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import requests
-import logging
 from bs4 import BeautifulSoup
 
 
@@ -34,20 +33,3 @@ def install(config, install_path):
         protocol=config.get('config', 'protocol'),
         secret=soup.a.text
     )
-
-
-def logger():
-    """
-    Настройка логгирования
-
-    :return: Logger
-    """
-    logger = logging.getLogger('threads')
-    logger.setLevel(logging.DEBUG)
-    fh = logging.FileHandler('threads.log')
-    fmt = '%(asctime)s - %(threadName)s - %(levelname)s - %(message)s'
-    formatter = logging.Formatter(fmt)
-    fh.setFormatter(formatter)
-    logger.addHandler(fh)
-
-    return logger
