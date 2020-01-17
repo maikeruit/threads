@@ -42,10 +42,11 @@ def data(path):
         dict(
             payload={
                 'main_name': '{} | Best | Sell | Worldwide delivery'.format(domain.title()),
-                'NAME': ' save'
+                'NAME': 'save'
             },
             params={
-                'controller': 'seo'
+                'controller': 'seo',
+                'lang': 'en'
             }
         ),
         dict(
@@ -94,7 +95,8 @@ def data(path):
                 'SECOND_PATH_EDIT': 'save'
             },
             params={
-                'controller': 'seo'
+                'controller': 'seo',
+                'lang': 'en'
             }
         ),
         dict(
@@ -144,6 +146,7 @@ def data(path):
             },
             params={
                 'controller': 'seo',
+                'lang': 'en'
             }
         ),
         dict(
