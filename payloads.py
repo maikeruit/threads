@@ -4,6 +4,23 @@ import re
 import random
 from urllib.parse import urlparse
 
+script = '''
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5346178e032a46d1"></script>
+<script type="text/javascript">
+addthis.layers({
+    'theme' : 'transparent',
+    'share' : {
+        'position' : 'left',
+        'numPreferredServices' : 5
+    }, 
+    'follow' : {
+        'services' : []
+    },  
+    'whatsnext' : {},  
+        'recommended' : {} 
+    });
+</script>
+'''
 
 def data(path):
     o = urlparse(path)
@@ -13,25 +30,7 @@ def data(path):
     return [
         dict(
             payload={
-                'users': '<h1>{}</h1>Best | Sell | <b>{}</b> | Worldwide delivery'.format(domain.title(), domain) + '''
-<!-- AddThis Smart Layers BEGIN -->
-<!-- Go to http://www.addthis.com/get/smart-layers to customize -->
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5346178e032a46d1"></script>
-<script type="text/javascript">
-  addthis.layers({
-    'theme' : 'transparent',
-    'share' : {
-      'position' : 'left',
-      'numPreferredServices' : 5
-    }, 
-    'follow' : {
-      'services' : []
-    },  
-    'whatsnext' : {},  
-    'recommended' : {} 
-  });
-</script>
-<!-- AddThis Smart Layers END -->''',
+                'users': '<h1>{}</h1>Big Sale | Save up to 15% | Big Packs | <b>{}</b> | Free Shipping'.format(domain.title(), domain) + script,
                 'USERS_CODE': 'save'
             },
             params={
@@ -40,7 +39,7 @@ def data(path):
         ),
         dict(
             payload={
-                'main_name': '{} | Best | Sell | Worldwide delivery'.format(domain.title()),
+                'main_name': '{} | Best | Sell | Worldwide delivery'.format(domain.title()) + script,
                 'NAME': 'save'
             },
             params={
@@ -49,7 +48,7 @@ def data(path):
         ),
         dict(
             payload={
-                'main_name': '{} | Beste | Verkaufen | Weltweite Lieferung'.format(domain.title()),
+                'main_name': '{} | Beste | Verkaufen | Weltweite Lieferung'.format(domain.title()) + script,
                 'NAME': 'save'
             },
             params={
@@ -59,7 +58,7 @@ def data(path):
         ),
         dict(
             payload={
-                'main_name': '{} | Meilleur | Vendre | Livraison dans le monde'.format(domain.title()),
+                'main_name': '{} | Meilleur | Vendre | Livraison dans le monde'.format(domain.title()) + script,
                 'NAME': 'save'
             },
             params={
@@ -69,7 +68,7 @@ def data(path):
         ),
         dict(
             payload={
-                'main_name': '{} | El Mejor | Vender | Envíos a todo el mundo'.format(domain.title()),
+                'main_name': '{} | El Mejor | Vender | Envíos a todo el mundo'.format(domain.title()) + script,
                 'NAME': 'save'
             },
             params={
@@ -79,7 +78,7 @@ def data(path):
         ),
         dict(
             payload={
-                'main_name': '{} | Il migliore | Vendi | Consegna in tutto il mondo'.format(domain.title()),
+                'main_name': '{} | Il migliore | Vendi | Consegna in tutto il mondo'.format(domain.title()) + script,
                 'NAME': 'save'
             },
             params={
